@@ -1,0 +1,391 @@
+/* ===== CSS Variables ===== */
+:root {
+  --bg: #f0f2f5;
+  --surface: #ffffff;
+  --primary: #6c63ff;
+  --primary-dark: #574fd6;
+  --income: #22c55e;
+  --expense: #ef4444;
+  --text: #1e1e2e;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --alert-bg: #fef3c7;
+  --alert-border: #f59e0b;
+  --alert-text: #92400e;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --radius: 16px;
+}
+
+[data-theme="dark"] {
+  --bg: #0f0f1a;
+  --surface: #1a1a2e;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --border: #2d2d44;
+  --alert-bg: #3b2f00;
+  --alert-border: #f59e0b;
+  --alert-text: #fcd34d;
+  --shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+
+/* ===== Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background 0.3s, color 0.3s;
+}
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ===== Header ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.header h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.icon-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s;
+}
+
+.icon-btn:hover { transform: scale(1.1); }
+
+/* ===== Balance Card ===== */
+.balance-card {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.balance-label {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  margin-bottom: 4px;
+}
+
+.balance-amount {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.balance-row {
+  display: flex;
+  gap: 32px;
+}
+
+.sub-label {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  margin-bottom: 2px;
+}
+
+.income-total { font-size: 1rem; font-weight: 600; color: #86efac; }
+.expense-total { font-size: 1rem; font-weight: 600; color: #fca5a5; }
+
+/* ===== Alert ===== */
+.limit-alert {
+  background: var(--alert-bg);
+  border: 1px solid var(--alert-border);
+  color: var(--alert-text);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ===== Cards ===== */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-header .section-title { margin-bottom: 0; }
+
+/* ===== Form ===== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input, select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  background: var(--bg);
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+input:focus, select:focus { border-color: var(--primary); }
+
+.form-row {
+  display: flex;
+  gap: 8px;
+}
+
+.form-row input,
+.form-row select { flex: 1; }
+
+.primary-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.primary-btn:hover { background: var(--primary-dark); }
+.primary-btn:active { transform: scale(0.98); }
+
+.secondary-btn {
+  background: var(--bg);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.secondary-btn:hover { background: var(--primary); color: #fff; }
+
+/* ===== Spending Limit ===== */
+.limit-info {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+/* ===== Sort Controls ===== */
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.sort-controls select {
+  width: auto;
+  padding: 6px 10px;
+  font-size: 0.82rem;
+}
+
+/* ===== Transaction List ===== */
+.tx-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 20px 0;
+}
+
+.tx-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  transition: transform 0.15s;
+}
+
+.tx-item:hover { transform: translateX(2px); }
+
+.tx-item.over-limit {
+  border-color: var(--alert-border);
+  background: var(--alert-bg);
+}
+
+.tx-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.tx-icon.income { background: #dcfce7; }
+.tx-icon.expense { background: #fee2e2; }
+
+.tx-info { flex: 1; min-width: 0; }
+
+.tx-desc {
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tx-meta {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.tx-amount {
+  font-size: 0.95rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.tx-amount.income { color: var(--income); }
+.tx-amount.expense { color: var(--expense); }
+
+.tx-delete {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px;
+  border-radius: 6px;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+
+.tx-delete:hover { color: var(--expense); }
+
+/* ===== Chart Legend ===== */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ===== Modal ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 16px;
+}
+
+.modal {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 24px;
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+.modal h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.modal input {
+  margin-bottom: 16px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.modal-actions .primary-btn,
+.modal-actions .secondary-btn {
+  flex: 1;
+}
+
+/* ===== Utility ===== */
+.hidden { display: none !important; }
+
+/* ===== Responsive ===== */
+@media (max-width: 360px) {
+  .balance-amount { font-size: 1.8rem; }
+  .app { padding: 12px; }
+}
